@@ -15,6 +15,7 @@ const App: React.FC = () => {
     return (
         
             <IonApp>
+                
                 <IonContent>
                 <Map lat={28.1296} long={-15.4480} />
                 </IonContent>
