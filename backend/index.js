@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const data = require("./Config/data");
+const userService = require("./Services/user.service").getUserService();
 
 const corsOption = {
   //   origin: "",
@@ -11,10 +12,17 @@ const corsOption = {
 
 db.sequelize.sync({ force: true }).then(async () => {
   console.log("Sync db");
+  userService.createUser({
+    name: "admin",
+    password: "admin",
+    email: "admin@admin.com",
+    role: "admin",
+    profile_picture: "",
+  });
   db.category.bulkCreate(data.category);
-  db.route.bulkCreate(data.route);
+  // db.route.bulkCreate(data.route);
   db.place.bulkCreate(data.place);
-  db.route_places.bulkCreate(data.route_places);
+  // db.route_places.bulkCreate(data.route_places);
 });
 
 const app = express();
